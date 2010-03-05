@@ -1,0 +1,26 @@
+
+1  int
+2  N checkboxes
+3  checkbox
+4  int int int
+5  last, first, mi
+6  checkbox
+7  int, int, int, int
+8  checkbox, string
+9  N checkboxes, string, string, string
+10 checkbox, N checkboxes
+
+# repeat the following up to and including person 6:
+1 last, first, mi
+2 checkbox
+3 checkbox
+4 int, int, int, int (#7 above)
+5 checkbox, string (#8 above)
+6 N checkboxes, string, string, string (#9 above)
+7 checkbox, N checkboxes (#10 above)
+
+# repeat the following:
+1 last, first, mi
+2 checkbox
+3 int, int, int, int
+4 checkbox

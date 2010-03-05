@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+      {% if entry.author %}
+        <b>{{ entry.author.nickname }}</b> wrote:
+      {% else %}
+        No work found.
+      {% endif %}
+
+    <form action="/sign" method="post">
+        <div>{{ entry.date }}</div>
+        {% if entry.key %}
+        <input type="hidden" name="entry_key" value="{{ entry.key }}"></input>
+        {% endif %}
+        <ol>
+            <li>Address: <textarea rows="4" name="address" value="{{ entry.address }}"></textarea></li>
+        </ol>
+        <ol>
+            <li>How many people: <input name="num_residents" type="text" value="{{ entry.num_residents }}"</input></li>
+            <li>Were there any additional people staying here? (checkboxes)</li>
+            <li>
+                <ol>
+                    <li>Last name:<input name="last_name" type="text" value="{{ entry.last_name }}"></input></li>
+                    <li>First name:<input name="first_name" type="text" value="{{ entry.first_name }}"></input></li>
+                    <li>Middle Initial:<input name="middle_initial" type="text" value="{{ entry.middle_initial }}"></input></li>
+                </ol>
+            </li>
+        </ol>
+      <div><input type="submit" value="Save Progress"></div>
+    </form>
+
+    <a href="{{ url }}">{{ url_linktext }}</a>
+
+  </body>
+</html>
