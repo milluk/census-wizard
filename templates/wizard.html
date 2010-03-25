@@ -86,17 +86,28 @@
             </span>
 
             {% for person_num in person_nums %}
-              <span class="step" id="person_{{ person_num }}_info">
+              <span class="step" id="step_person_{{ person_num }}_info">
                 <span>Person {{ person_num }}'s information</span>
                 <br />
-                <label for="firstname">First name</label>
+                <label for="p{{ person_num }}_first_name">First name</label>
                 <br />
-                <input name="person_{{ person_num }}_firstname"/>
+                <input name="p{{ person_num }}_first_name"/>
                 <br />
-                <label for="surname">Surname</label>
+                <label for="p{{ person_num }}_last_name">Surname</label>
                 <br />
-                <input name="person_{{ person_num }}_surname"/>
+                <input name="p{{ person_num }}_last_name"/>
                 <br />
+                should have more stuff here like race, age, etc.
+                <!--
+                the field names should match those found in:
+                http://github.com/milluk/census-wizard/blob/master/main.py (p00_... @ line 25)
+
+                <label for="p{{ pnum }}_age">Age</label>
+                <br />
+                <input name="p{{ pnum }}_age" />
+                <br />
+
+                -->
               </span>
             {% endfor %}
 
