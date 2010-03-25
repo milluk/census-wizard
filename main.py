@@ -212,7 +212,26 @@ class APIHandler(webapp.RequestHandler):
     self.response.out.write("Valid properties: " + json.dumps(valid_properties, sort_keys = True, indent = 4))
     self.response.out.write("<pre></body></html>")
 
-application = webapp.WSGIApplication([('/api', APIHandler)], debug=True)
+class WizardHandler(webapp.RequestHandler):
+  def get(self):
+    person_nums = []
+    for num in range(0, 2):
+      person_nums.append("%02d" % (num))
+
+    values = {
+      'person_nums': person_nums,
+    }
+
+    directory = os.path.dirname(__file__)
+    path = os.path.join(directory, os.path.join('templates', 'wizard.html'))
+    self.response.out.write(template.render(path, values))
+
+application = webapp.WSGIApplication(
+    [
+      ('/api', APIHandler),
+      ('/wizard', WizardHandler),
+    ],
+    debug=True)
 
 def main():
   run_wsgi_app(application)
