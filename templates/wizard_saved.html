@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/main.css" />
+  </head>
+  <body>
+
+  <div style="display: none;">
+    <!-- store disabled form elements here, add them after wizard steps as necessary -->
+
+  </div>
+
+  <div id="demo">
+    <a href="/wizard"><h2>CensusWizard</h2></a>
+
+    <pre>
+      email:         {{ entry_dict.email }}
+      streetaddress: {{ entry_dict.streetaddress }}
+      Your name:     {{ entry_dict.first_name }} {{ entry_dict.last_name }}
+      person 1 name: {{ entry_dict.p00_first_name }} {{ entry_dict.p00_last_name }}
+    </pre>
+
+  </div>
+  <a href="{{ logout_url }}">logout</a>
+
+
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/jquery.form.wizard-2.0.0-RC4-min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+        });
+    </script>
+<!--
+-->
+  </body>
+</html>

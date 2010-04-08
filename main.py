@@ -1,7 +1,7 @@
 import os
 import json
 import cgi
-import uuid
+import sys
 
 from google.appengine.api import users
 from google.appengine.ext import webapp
@@ -268,17 +268,97 @@ class APIHandler(webapp.RequestHandler):
 
 class WizardHandler(webapp.RequestHandler):
   def get(self):
-    person_nums = []
-    for num in range(0, 2):
-      person_nums.append("%02d" % (num))
+    user = users.get_current_user()
+    if not user:
+      self.redirect(users.create_login_url(self.request.uri))
+
+    persons     = []
+    for num in range(0, 12):
+      persons.append({ 'id': "%02d" % (num), 'next': "%02d" % (num + 1) });
+
 
     values = {
-      'person_nums': person_nums,
+      'persons'    : persons,
+      'logout_url' : users.create_logout_url(self.request.uri)
     }
 
     directory = os.path.dirname(__file__)
     path = os.path.join(directory, os.path.join('templates', 'wizard.html'))
     self.response.out.write(template.render(path, values))
+
+  def post(self):
+    user = users.get_current_user()
+    if not user:
+      self.redirect(users.create_login_url(self.request.uri))
+
+    # we were given an email, try to get the entry associated with it
+    email   = user.email()
+    unique_key   = '%s%s' % ('00000', email)
+
+    properties = [
+        'first_name',
+        'last_name',
+        'email',
+        'phone',
+        'address',
+        'address_ownership',
+        'streetaddress',
+        'streetaddress2',
+        'city',
+        'state',
+        'zip',
+        'ownership',
+        'num_residents',
+        'unique_key',
+    ]
+
+    person_properties = [
+        'last_name',
+        'first_name',
+        'middle_initial',
+        'sex',
+        'birth_date',
+        'birth_month',
+        'birth_day',
+        'birth_year',
+        'hispanic',
+        'race',
+        'usual_residence',
+        'relation',
+    ]
+
+    # build a dict of valid properties
+    valid_properties = {}
+    for num_person in range(12):
+        for property in person_properties:
+            valid_properties['p%02d_%s' % (num_person, property)] = 1
+
+    for property in properties:
+        valid_properties[property] = 1
+
+    entry_dict = {}
+    for prop_name, prop_class in Entry.properties().iteritems():
+        if prop_name in valid_properties:
+            value = self.request.get(prop_name, default_value=None)
+            if value:
+                entry_dict[prop_name] = value
+
+    entry_dict['unique_key'] = unique_key
+    entry_dict['email']      = user.email()
+
+    # save the entry
+    entry = Entry(key_name=unique_key, **entry_dict)
+    entry.put()
+
+    values = {
+      'logout_url' : users.create_logout_url(self.request.uri),
+      'entry_dict' : entry_dict,
+    }
+
+    directory = os.path.dirname(__file__)
+    path = os.path.join(directory, os.path.join('templates', 'wizard_saved.html'))
+    self.response.out.write(template.render(path, values))
+
 
 application = webapp.WSGIApplication(
     [
