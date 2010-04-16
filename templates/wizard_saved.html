@@ -11,12 +11,44 @@
 
   <div id="demo">
     <a href="/wizard"><h2>CensusWizard</h2></a>
+	here are the results of your 2010 Census Questionnaire
+	
+	  
+      {% comment %}
+      <table>
+        <tr>
+          <td> Respondent Name: </td>
+          <td> {{ entry_dict.first_name }} {{ entry_dict.last_name }} </td>
+        </tr>
+        <tr>
+          <td> Respondent Email: </td>
+          <td>{{ entry_dict.email }}</td>
+        </tr>
+      </table>
+      {% endcomment %}
 
     <pre>
-      email:         {{ entry_dict.email }}
-      streetaddress: {{ entry_dict.streetaddress }}
-      Your name:     {{ entry_dict.first_name }} {{ entry_dict.last_name }}
-      person 1 name: {{ entry_dict.p00_first_name }} {{ entry_dict.p00_last_name }}
+      Respondent Name:          {{ entry_dict.first_name }} {{ entry_dict.last_name }}
+      Respondent Email:         {{ entry_dict.email }}
+      Respondent Phone:         {{ entry_dict.phone }}
+      Residence:                {{ entry_dict.streetaddress }} 
+                                {{ entry_dict.streetaddress2 }}
+                                {{ entry_dict.city }}, {{entry_dict.state }}   {{ entry_dict.zip }}
+      Ownership Type:           {{ entry_dict.ownership }} 
+
+						 
+      other list:
+      {% for p in people %}
+      person {{ forloop.counter }} name:           {{ p.last_name }}
+      person {{ forloop.counter }} given name(s):  {{ p.first_name }} {{ p.middle_initial }}
+      person {{ forloop.counter }} sex:            {{ p.sex }}
+      person {{ forloop.counter }} birthday:       {{ p.birth_month }} {{ p.birth_day }}, {{p.birth_year }}
+      person {{ forloop.counter }} hispanic?       {{ p.hispanic }}
+      person {{ forloop.counter }} race:           {{ p.race }}
+      person {{ forloop.counter }} resident:       {{ p.usual_residence }}
+      relation to person 1:     {{ p.relation }}
+      {% endfor %}
+	  
     </pre>
 
   </div>

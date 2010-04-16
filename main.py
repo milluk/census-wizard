@@ -11,6 +11,13 @@ from google.appengine.ext.webapp import template
 
 shared_secrety_api_key = '<SHARED SECRET HERE>'
 
+ownership_labels = {
+  'renter'        : 'Rents or leases this residence',
+  'title_holder'  : 'Owns this residence free and clear (no loan or mortgage)',
+  'occupant'      : 'Stays at this residence, but no residents staying here qualify as a renter or owner',
+  'mortgagee'     : 'Owns this residence through a mortgage, loan (e.g., home equity loan), reverse mortgage, or similar debt',
+}
+
 class Entry(db.Model):
   author            = db.UserProperty()
   date              = db.DateTimeProperty(auto_now=True)
@@ -278,8 +285,9 @@ class WizardHandler(webapp.RequestHandler):
 
 
     values = {
-      'persons'    : persons,
-      'logout_url' : users.create_logout_url(self.request.uri)
+      'persons'           : persons,
+      'logout_url'        : users.create_logout_url(self.request.uri),
+      'ownership_labels'  : ownership_labels,
     }
 
     directory = os.path.dirname(__file__)
@@ -327,6 +335,8 @@ class WizardHandler(webapp.RequestHandler):
         'relation',
     ]
 
+    people = []
+
     # build a dict of valid properties
     valid_properties = {}
     for num_person in range(12):
@@ -350,9 +360,24 @@ class WizardHandler(webapp.RequestHandler):
     entry = Entry(key_name=unique_key, **entry_dict)
     entry.put()
 
+    # go through the row and collect the p00 values up together
+    for num_person in range(12):
+        attributes = {}
+        for property in person_properties:
+            attribute = 'p%02d_%s' % (num_person, property);
+            if attribute in entry_dict and entry_dict[attribute]:
+                attributes[property] = entry_dict[attribute]
+        if attributes.keys():
+          people.append(attributes)
+        #people.append(attributes)
+
+    if 'ownership' in entry_dict:
+      entry_dict['ownership'] = ownership_labels[entry_dict['ownership']]
+
     values = {
-      'logout_url' : users.create_logout_url(self.request.uri),
-      'entry_dict' : entry_dict,
+      'logout_url'        : users.create_logout_url(self.request.uri),
+      'entry_dict'        : entry_dict,
+      'people'            : people,
     }
 
     directory = os.path.dirname(__file__)

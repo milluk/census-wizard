@@ -23,7 +23,7 @@
         <label for="welcome">To get started, click Next</label><br /> <br>
             </span>
       
-            <span class="step" id="step_residence">
+      <span class="step" id="step_residence">
               <span><b>Residence Information</b></span><br />
               <label for="welcome">The U.S. Census Bureau sends out forms to "Residents" across the U.S.</label><br />
         <label for="welcome">The residence below is where Census sent (or should have sent) the Census questionnaire.</label><br /><br>
@@ -107,18 +107,12 @@
               <span><b>Residence Ownership Status</b></span><br />
         <label for="ownership">For the people who live or stay here, someone at this residence _______ </label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
-              <input type="radio" name="ownership" value="mortgage" />
-                Owns this residence through a mortgage, loan (e.g., home equity loan), reverse mortgage, or similar debt
+              {% for ownership in ownership_labels.items %}
+              <input type="radio" name="ownership" value="{{ ownership.0 }}" />
+                {{ ownership.1 }}
               <br/>
-              <input type="radio" name="ownership" value="free_clear" />
-                  Owns this residence free and clear (no loan or mortgage)
-              <br/>
-              <input type="radio" name="ownership" value="rent" />
-                Rents or leases this residence
-              <br/>
-              <input type="radio" name="ownership" value="occupy" />
-                Stays at this residence, but no residents staying here qualify as a renter or owner
-              <br/>
+              {% endfor %}
+
             </span>
 
 
@@ -126,7 +120,7 @@
 
       <!-- How to make person_nums a result of user input? -->
         <span class="step" id="step_person_{{ person.id }}_info">
-                <span><b>Person {{ person.id }}'s information</b></span>
+                <span><b>Person {{ forloop.counter }}'s information</b></span>
                 <br />
         <br><b>Name</b><br>
                 <label for="p{{ person.id }}_first_name">First name</label>
@@ -143,12 +137,12 @@
                 <br />      
         <br>
         <label for="p{{ person.id }}_sex"><b>Sex</b></label>
-                <br />
-          <input type="radio" name="sex" value="male" />
+              <br />
+          <input type="radio" name="p{{ person.id }}_sex" value="male" />
                 Male
               <br/>
-              <input type="radio" name="sex" value="female" />
-                  Female
+          <input type="radio" name="p{{ person.id }}_sex" value="female" />
+                Female
               <br/>
                 <br />        
         <b>Birthday</b><br>
@@ -172,155 +166,155 @@
           </select>
                   <select disabled="disabled" name="p{{ person.id }}_birth_day" id="p{{ person.id }}_birth_day">
             <option value=""></option>
-            <option value="bday01">1</option>
-            <option value="bday02">2</option>
-            <option value="bday03">3</option>
-            <option value="bday04">4</option>
-            <option value="bday05">5</option>
-            <option value="bday06">6</option>
-            <option value="bday07">7</option>
-            <option value="bday08">8</option>
-            <option value="bday09">9</option>
-            <option value="bday10">10</option>
-            <option value="bday11">11</option>
-            <option value="bday12">12</option>
-            <option value="bday13">13</option>
-            <option value="bday14">14</option>
-            <option value="bday15">15</option>
-            <option value="bday16">16</option>
-            <option value="bday17">17</option>
-            <option value="bday18">18</option>
-            <option value="bday19">19</option>
-            <option value="bday20">20</option>
-            <option value="bday21">21</option>
-            <option value="bday22">22</option>
-            <option value="bday23">23</option>
-            <option value="bday24">24</option>
-            <option value="bday25">25</option>
-            <option value="bday26">26</option>
-            <option value="bday27">27</option>
-            <option value="bday28">28</option>
-            <option value="bday29">29</option>
-            <option value="bday30">30</option>
-            <option value="bday31">31</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+            <option value="13">13</option>
+            <option value="14">14</option>
+            <option value="15">15</option>
+            <option value="16">16</option>
+            <option value="17">17</option>
+            <option value="18">18</option>
+            <option value="19">19</option>
+            <option value="20">20</option>
+            <option value="21">21</option>
+            <option value="22">22</option>
+            <option value="23">23</option>
+            <option value="24">24</option>
+            <option value="25">25</option>
+            <option value="26">26</option>
+            <option value="27">27</option>
+            <option value="28">28</option>
+            <option value="29">29</option>
+            <option value="30">30</option>
+            <option value="31">31</option>
           </select>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<select disabled="disabled" name="p{{ person.id }}_birth_year" id="p{{ person.id }}_birth_year">
             <option value=""></option>
-            <option value="year2010">2010</option>
-            <option value="year2009">2009</option>
-            <option value="year2008">2008</option>
-            <option value="year2007">2007</option>
-            <option value="year2006">2006</option>
-            <option value="year2005">2005</option>
-            <option value="year2004">2004</option>
-            <option value="year2003">2003</option>
-            <option value="year2002">2002</option>
-            <option value="year2001">2001</option>
-            <option value="year2000">2000</option>
-            <option value="year1999">1999</option>
-            <option value="year1998">1998</option>
-            <option value="year1997">1997</option>
-            <option value="year1996">1996</option>
-            <option value="year1995">1995</option>
-            <option value="year1994">1994</option>
-            <option value="year1993">1993</option>
-            <option value="year1992">1992</option>
-            <option value="year1991">1991</option>
-            <option value="year1990">1990</option>
-            <option value="year1989">1989</option>
-            <option value="year1988">1988</option>
-            <option value="year1987">1987</option>
-            <option value="year1986">1986</option>
-            <option value="year1985">1985</option>
-            <option value="year1984">1984</option>
-            <option value="year1983">1983</option>
-            <option value="year1982">1982</option>
-            <option value="year1981">1981</option>
-            <option value="year1980">1980</option>
-            <option value="year1979">1979</option>
-            <option value="year1978">1978</option>
-            <option value="year1977">1977</option>
-            <option value="year1976">1976</option>
-            <option value="year1975">1975</option>
-            <option value="year1974">1974</option>
-            <option value="year1973">1973</option>
-            <option value="year1972">1972</option>
-            <option value="year1971">1971</option>
-            <option value="year1970">1970</option>
-            <option value="year1969">1969</option>
-            <option value="year1968">1968</option>
-            <option value="year1967">1967</option>
-            <option value="year1966">1966</option>
-            <option value="year1965">1965</option>
-            <option value="year1964">1964</option>
-            <option value="year1963">1963</option>
-            <option value="year1962">1962</option>
-            <option value="year1961">1961</option>
-            <option value="year1960">1960</option>
-            <option value="year1959">1959</option>
-            <option value="year1958">1958</option>
-            <option value="year1957">1957</option>
-            <option value="year1956">1956</option>
-            <option value="year1955">1955</option>
-            <option value="year1954">1954</option>
-            <option value="year1953">1953</option>
-            <option value="year1952">1952</option>
-            <option value="year1951">1951</option>
-            <option value="year1950">1950</option>
-            <option value="year1949">1949</option>
-            <option value="year1948">1948</option>
-            <option value="year1947">1947</option>
-            <option value="year1946">1946</option>
-            <option value="year1945">1945</option>
-            <option value="year1944">1944</option>
-            <option value="year1943">1943</option>
-            <option value="year1942">1942</option>
-            <option value="year1941">1941</option>
-            <option value="year1940">1940</option>
-            <option value="year1939">1939</option>
-            <option value="year1938">1938</option>
-            <option value="year1937">1937</option>
-            <option value="year1936">1936</option>
-            <option value="year1935">1935</option>
-            <option value="year1934">1934</option>
-            <option value="year1933">1933</option>
-            <option value="year1932">1932</option>
-            <option value="year1931">1931</option>
-            <option value="year1930">1930</option>
-            <option value="year1929">1929</option>
-            <option value="year1928">1928</option>
-            <option value="year1927">1927</option>
-            <option value="year1926">1926</option>
-            <option value="year1925">1925</option>
-            <option value="year1924">1924</option>
-            <option value="year1923">1923</option>
-            <option value="year1922">1922</option>
-            <option value="year1921">1921</option>
-            <option value="year1920">1920</option>
-            <option value="year1919">1919</option>
-            <option value="year1918">1918</option>
-            <option value="year1917">1917</option>
-            <option value="year1916">1916</option>
-            <option value="year1915">1915</option>
-            <option value="year1914">1914</option>
-            <option value="year1913">1913</option>
-            <option value="year1912">1912</option>
-            <option value="year1911">1911</option>
-            <option value="year1910">1910</option>
-            <option value="year1909">1909</option>
-            <option value="year1908">1908</option>
-            <option value="year1907">1907</option>
-            <option value="year1906">1906</option>
-            <option value="year1905">1905</option>
-            <option value="year1904">1904</option>
-            <option value="year1903">1903</option>
-            <option value="year1902">1902</option>
-            <option value="year1901">1901</option>
-            <option value="year1900">1900</option>
-            <option value="year1899">1899</option>
-            <option value="year1898">1898</option>
-            <option value="year1897">1897</option>
-            <option value="year1896">1896</option>
+            <option value="2010">2010</option>
+            <option value="2009">2009</option>
+            <option value="2008">2008</option>
+            <option value="2007">2007</option>
+            <option value="2006">2006</option>
+            <option value="2005">2005</option>
+            <option value="2004">2004</option>
+            <option value="2003">2003</option>
+            <option value="2002">2002</option>
+            <option value="2001">2001</option>
+            <option value="2000">2000</option>
+            <option value="1999">1999</option>
+            <option value="1998">1998</option>
+            <option value="1997">1997</option>
+            <option value="1996">1996</option>
+            <option value="1995">1995</option>
+            <option value="1994">1994</option>
+            <option value="1993">1993</option>
+            <option value="1992">1992</option>
+            <option value="1991">1991</option>
+            <option value="1990">1990</option>
+            <option value="1989">1989</option>
+            <option value="1988">1988</option>
+            <option value="1987">1987</option>
+            <option value="1986">1986</option>
+            <option value="1985">1985</option>
+            <option value="1984">1984</option>
+            <option value="1983">1983</option>
+            <option value="1982">1982</option>
+            <option value="1981">1981</option>
+            <option value="1980">1980</option>
+            <option value="1979">1979</option>
+            <option value="1978">1978</option>
+            <option value="1977">1977</option>
+            <option value="1976">1976</option>
+            <option value="1975">1975</option>
+            <option value="1974">1974</option>
+            <option value="1973">1973</option>
+            <option value="1972">1972</option>
+            <option value="1971">1971</option>
+            <option value="1970">1970</option>
+            <option value="1969">1969</option>
+            <option value="1968">1968</option>
+            <option value="1967">1967</option>
+            <option value="1966">1966</option>
+            <option value="1965">1965</option>
+            <option value="1964">1964</option>
+            <option value="1963">1963</option>
+            <option value="1962">1962</option>
+            <option value="1961">1961</option>
+            <option value="1960">1960</option>
+            <option value="1959">1959</option>
+            <option value="1958">1958</option>
+            <option value="1957">1957</option>
+            <option value="1956">1956</option>
+            <option value="1955">1955</option>
+            <option value="1954">1954</option>
+            <option value="1953">1953</option>
+            <option value="1952">1952</option>
+            <option value="1951">1951</option>
+            <option value="1950">1950</option>
+            <option value="1949">1949</option>
+            <option value="1948">1948</option>
+            <option value="1947">1947</option>
+            <option value="1946">1946</option>
+            <option value="1945">1945</option>
+            <option value="1944">1944</option>
+            <option value="1943">1943</option>
+            <option value="1942">1942</option>
+            <option value="1941">1941</option>
+            <option value="1940">1940</option>
+            <option value="1939">1939</option>
+            <option value="1938">1938</option>
+            <option value="1937">1937</option>
+            <option value="1936">1936</option>
+            <option value="1935">1935</option>
+            <option value="1934">1934</option>
+            <option value="1933">1933</option>
+            <option value="1932">1932</option>
+            <option value="1931">1931</option>
+            <option value="1930">1930</option>
+            <option value="1929">1929</option>
+            <option value="1928">1928</option>
+            <option value="1927">1927</option>
+            <option value="1926">1926</option>
+            <option value="1925">1925</option>
+            <option value="1924">1924</option>
+            <option value="1923">1923</option>
+            <option value="1922">1922</option>
+            <option value="1921">1921</option>
+            <option value="1920">1920</option>
+            <option value="1919">1919</option>
+            <option value="1918">1918</option>
+            <option value="1917">1917</option>
+            <option value="1916">1916</option>
+            <option value="1915">1915</option>
+            <option value="1914">1914</option>
+            <option value="1913">1913</option>
+            <option value="1912">1912</option>
+            <option value="1911">1911</option>
+            <option value="1910">1910</option>
+            <option value="1909">1909</option>
+            <option value="1908">1908</option>
+            <option value="1907">1907</option>
+            <option value="1906">1906</option>
+            <option value="1905">1905</option>
+            <option value="1904">1904</option>
+            <option value="1903">1903</option>
+            <option value="1902">1902</option>
+            <option value="1901">1901</option>
+            <option value="1900">1900</option>
+            <option value="1899">1899</option>
+            <option value="1898">1898</option>
+            <option value="1897">1897</option>
+            <option value="1896">1896</option>
           </select><br />          
                 <br />              
         <label for="p{{ person.id }}_hispanic"><b>Hispanic Origin</b></label>
@@ -329,15 +323,15 @@
               <!--  associate triggers with these input elements to prepopulate later fields -->          
               <select disabled="disabled" name="p{{ person.id }}_hispanic" id="p{{ person.id }}_hispanic">
             <option value=""></option>
-            <option value="not_hisp">No, not of Hispanic, Latino, or Spanish origin</option>
-            <option value="hisp_mex">Yes, Mexican, Mexican American, Chicano</option>
-            <option value="hisp_cuban">Yes, Cuban</option>
-            <option value="hisp_arg">Yes, Argentinian</option>
-            <option value="hisp_colo">Yes, Colombian</option>
-            <option value="hisp_dom">Yes, Dominican</option>
-            <option value="hisp_nic">Yes, Nicaraguan</option>
-            <option value="hisp_salv">Yes, Salvadoran</option>
-            <option value="hisp_spain">Yes, Spainard</option>
+            <option value="Nonhispanic">No, not of Hispanic, Latino, or Spanish origin</option>
+            <option value="Mexican">Yes, Mexican, Mexican American, Chicano</option>
+            <option value="Cuban">Yes, Cuban</option>
+            <option value="Argentinian">Yes, Argentinian</option>
+            <option value="Colombian">Yes, Colombian</option>
+            <option value="Dominican">Yes, Dominican</option>
+            <option value="Nicaraguan">Yes, Nicaraguan</option>
+            <option value="Salvadoran">Yes, Salvadoran</option>
+            <option value="Spainard">Yes, Spainard</option>
           </select><br />    
                 <label for="p{{ person.id }}_hispanic">If not listed above, please type in</label><br />
         <input name="p{{ person.id }}_hispanic"/><br>
@@ -347,49 +341,49 @@
                 <label for="p{{ person.id }}_race">Check all that apply</label><br>
         <label for="p{{ person.id }}_race">Fill in blanks for tribe name, or other asian or Pacific Islander race</label>
         <br /><br>
-              <input type="checkbox" name="race" value="white" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="white" />
                 White
               <br/>
-              <input type="checkbox" name="race" value="black" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="black" />
                   Black, African Am., or Negro
               <br/>
-              <input type="checkbox" name="race" value="amerind" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="amerind" />
                 American Indian or Alaska Native
           <br>
           <label for="p{{ person.id }}_race">Print name of enrolled or principal tribe:</label><br />  
               <input name="p{{ person.id }}_race"/>
           <br/><br>
-              <input type="checkbox" name="race" value="india" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="india" />
                 Asian Indian
-              <input type="checkbox" name="race" value="japan" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="japan" />
                 Japanese
-              &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="race" value="hawaii" />
+              &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="p{{ person.id }}_race" value="hawaii" />
                 Native Hawaiian            
               <br/>
-              <input type="checkbox" name="race" value="china" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="china" />
                 Chinese
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="race" value="korea" />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="p{{ person.id }}_race" value="korea" />
                 Korean          
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="race" value="guam" />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="p{{ person.id }}_race" value="guam" />
                 Guamanian or Chamorro          
           <br /> 
-              <input type="checkbox" name="race" value="fili" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="fili" />
                 Filipino
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="race" value="viet" />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="p{{ person.id }}_race" value="viet" />
                 Vietnamese
-              <input type="checkbox" name="race" value="samoa" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="samoa" />
                 Samoan
               <br/>
-              <input type="checkbox" name="race" value="other_asia" />
+              <input type="checkbox" name="p{{ person.id }}_race" value="other_asia" />
                 Other Asian
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="race" value="other_pacific" />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" name="p{{ person.id }}_race" value="other_pacific" />
                 Other Pacific Islander <br />
               <label for="p{{ person.id }}_race">Print Other Asian or Other Pacific Islander race here:</label><br />  
               <input name="p{{ person.id }}_race"/>
           <!-- Does the name race need to be different? --> 
           <br/>        
               <br>
-          <input type="checkbox" name="race" value="some_other" />
+          <input type="checkbox" name="p{{ person.id }}_race" value="some_other" />
                 Some other race
               <input name="p{{ person.id }}_race"/>
               <br/>
@@ -401,6 +395,7 @@
                 <br />
                  <select disabled="disabled" name="p{{ person.id }}_relation" id="p{{ person.id }}relation">
             <option value=""></option>
+            <option value="self">Me, Myself, or I</option>
             <option value="spouse">Husband or wife</option>
             <option value="child">Biological son or daughter</option>
             <option value="adoptee">Adopted son or daughter</option>
@@ -415,50 +410,21 @@
             <option value="roomie">Housemate or roommate</option>
             <option value="unmarried">Unmarried partner</option>
             <option value="other">Other nonrelative</option>
-            <option value="self">Me, Myself, or I</option>
           </select><br />    
                 <br />              
         
-        <label for="p{{ person.id }}_usual_residence"><b>Does [Person_Num] make this residence [his/her] usual residence?</b></label><br />
-        <label for="p{{ person.id }}_usual_residence">Be sure that [Person_Num] would not be counted elsewhere</label>
-        <!--  replace [Person_Num] with name and [his/her] with his or her per sex -->
-                <br />
-               <input type="radio" name="usual_residence" value="yes_usual" />
-                Yes, [Person_Num] makes this [his/her] usual residence
-              <br/>
-              <input type="radio" name="usual_residence" value="no_usual" />
-                No, [Person_Num] does not make this [his/her] usual residence
-              <br/>
-              <input type="radio" name="usual_residence" value="unsure_usual" />
-                Not sure, [he/she] may be counted elsewhere or help me answer the question
-              <br/>
-              
-        <!-- Fork people off to answer the question elsewhere -->
-        <label for="p{{ person.id }}_usual_residence">Special Conditions for Usual Residence</label>
+        <label for="p{{ person.id }}_usual_residence"><b>Does Person {{ forloop.counter }} make this residence their usual residence?</b></label><br />
+        <label for="p{{ person.id }}_usual_residence">Be sure that Person {{ forloop.counter }} would not be counted elsewhere</label><br />
+        <!--  replace Person {{ forloop.counter }} with name and [his/her] with his or her per sex -->
+        <label for="p{{ person.id }}_usual_residence">The usual residence of Person {{ forloop.counter }} _______</label>
         <br />
           <select disabled="disabled" name="p{{ person.id }}_usual_residence" id="p{{ person.id }}usual_residence">
-            <option value="baby">Babies, newborns, adopted children</option>
-            <option value="relative">Relatives </option>
-            <option value="college">Students, college, university, community college</option>
-            <option value="trips">Extended trips or vacations</option>
-            <option value="rv">RV parks, campgrounds, hostels, circuses or carnivals</option>
-            <option value="mission">Missionaries, Peace Corp, or similar</option>
-            <option value="hospital">Hospitals, residential treatment centers, or similar</option>
-            <option value="military">Armed Forces, Military or Merchant Marine</option>
-            <option value="nursing_home">Nursing home, hospice, care facility, assisted living facility, or similar</option>
-            <option value="jail">Jail, prison, detention facility, juvenile hall</option>
-            <option value="homeless">Homeless people, "tent cities", or similar</option>
-            <option value="foreign">People visiting from other countries</option>
-            <option value="group">Group homes</option>
-            <option value="moving">Moving or relocating</option>
-            <option value="snowbird">Two or more homes, Snow birds, or similar</option>
-            <option value="domviol">Domestic violence shelter, transitional shelters</option>
-            <option value="splitcust">Children whose parents or guardians split custody</option>
-            <option value="worker">Workers' Residential Facilities</option>
-            <option value="religious">Religious-Related Residential Facilities</option>
-            <option value="other">Other</option>
-          </select>
-          <br /> <br />              
+            <option value="yes">is at this address</option>
+            <option value="no">is not at this address</option>
+          </select>      
+        <!-- Fork people off to answer the question elsewhere -->
+        
+          <br /> <br />
           Do you have more people to enter?
           <select disabled="disabled" class="link" name="finished" id="p{{ person.id }}_finished">
             <option value="step_person_{{ person.next }}_info">Yes, I do</option>
@@ -473,13 +439,13 @@
       <span class="step" id="baby">
               <span><b>Babies, newborns, adopted children</b></span><br />
               <label for="baby">Babies and newborns born on or before April 1, 2010 that may still be in a hospital, should be counted at their soon-to-be usual place of residence.  Hospitals will be counting people for the 2010 Census, but only if they have no other usual residence.  Since babies will not be filling out their own forms, if a baby is dropped off at the hospital's door-step, the hospital will count that baby.   Babies that are being adopted from a foreign country, but have not yet been to the US, but are surely coming because the adoption is otherwise finalized, should be counted at their soon-to-be usual place of residence, in this site's opinion.  While the US Census to date has not given guidance to this matter, it is this site's opinion that adopted children surely on their way would qualify similar to newborns in hospitals.</label><br />    <br>        
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>
@@ -487,13 +453,13 @@
       <span class="step" id="relative">
               <span><b>Relatives living with you</b></span><br />
               <label for="relative">Relatives who make their usual residence at the address in question, should list themselves at this address.  If a relative has another residence, but lives and sleeps at this residence, while that other residence may be their legal, or for tax purpose, residence; the determining rule for the US Census is where do they usually sleep and live.  If this residence is where they usually sleep or live, then this is the residence that should be counted.</label><br />    <br>        
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>
@@ -512,13 +478,13 @@
         <b>Foreign Students</b><br>
         Foreign students living in the U.S. while attending college in the U.S. (living either on-campus or off-campus) should be counted at the on-campus or off-campus residence where they live and sleep most of the time.
         </label><br />    <br>        
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>      
@@ -527,13 +493,13 @@
       <span class="step" id="trips">
               <span><b>Extended trips or vacations</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People who are taking a vacation or business trips away from the US on April 1, 2010, should still be counted at their place of residence in the US.  Likewise, people visiting you and who will return to their normal and usual residence after the stay, should not be counted at this place of residence.  While it may be the case that a vacation or business trip ultimately never ends, if the assumption on April 1, 2010 is that the person will return to this usual residence, then that person should be counted on April 1, 2010.</label><br />    <br>        
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>      
@@ -543,13 +509,13 @@
               <label for="p{{ person.id }}_usual_residence">People at locations such as recreational vehicle (RV) parks, campgrounds, hotels and motels (including those on military sites), hostels, marinas, racetracks, circuses, or carnivals should be counted at the residence where they live and sleep most of the time.  If there is no residence where they live and sleep most of the time, they are counted where they live and sleep more than anywhere else.  If time is equally divided, or if usual residence cannot be determined, they are counted at the place where they are staying on Thursday, April 1, 2010 (Census Day).<br><br>
 
 So, if you make your usual residence somewhere other than the places listed above, then don't count yourself as living at the RV park, campground, marina, or otherwise.  If you're never "at home" but always on the road, then you should be counted where you are on April 1, 2010.</label><br />    <br>        
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>      
@@ -557,13 +523,13 @@ So, if you make your usual residence somewhere other than the places listed abov
       <span class="step" id="mission">
               <span><b>Missionaries, Peace Corp, or similar</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People who are out of the country either serving their religion, the Peace Corp, or some other service where they are staying outside of the US should not be counted in the 2010 US Census.  The US Census only counts people who are making their usual residence the United States on April 1, 2010.  While the expectation is that these people will return to the US, either to a parental home, a college, the military, or otherwise, and who are citizens who may have legal or for tax purpose reason to be counted in the US, for the purposes and definitions of the US Census, they should not be counted here.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>      
@@ -572,13 +538,13 @@ So, if you make your usual residence somewhere other than the places listed abov
               <span><b>Hospitals, residential treatment centers, or similar</b></span><br />
               <label for="p{{ person.id }}_usual_residence">Most people staying in hospitals will not be staying long.  Even people who may never leave a hospital, still consider and should be counted at their home, not the hospital.  A hospital is not a usual residence, nor is a residential treatment center, in-patient hospice facility, Veteran Affairs hospital a usual residence even if one may stay in such a facility for a long period of time.  However, there are cases where the hospital should count people who are in a hospital on April 1, 2010:
 when someone is otherwise homeless; when someone is not identifiable due to coma or amnesia for a presumed long period of time; when the hospital is a correctional facility; when the person is in a psychiatric unit or mental hospital for long-term non-acute care; when someone is in a nursing facility, skilled nursing facility; when someone is a juvenile facility that is correctional, a group home, or a residential treatment center</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>                  
@@ -593,13 +559,13 @@ U.S. military men and women who live on base, in barracks, serve on a vessel wit
 
 <b>Merchant Marine Personnel on U.S. flag maritime/merchant vessels</b>
 Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing from one U.S. port to another U.S. port on Thursday, April 1, 2010 (Census Day) should be counted at the onshore U.S. residence where they live and sleep most of the time.  If they have no onshore U.S. residence, they are counted at their vessel.  If the vessel is docked in a U.S. port, crewmembers with no onshore U.S. residence are counted at the port.  If the vessel is sailing from one U.S. port to another U.S. port, crewmembers with no onshore U.S. residence are counted at the port of departure. Crews of U.S. flag maritime/merchant vessels engaged in U.S. inland waterway transportation on Thursday, April 1, 2010 (Census Day) - Counted at the onshore residence where they live and sleep most of the time.  Crews of U.S. flag maritime/merchant vessels docked in a foreign port, sailing from one foreign port to another foreign port, sailing from a U.S. port to a foreign port, or sailing from a foreign port to a U.S. port on Thursday, April 1, 2010 (Census Day) - Not counted in the census.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>                        
@@ -608,13 +574,13 @@ Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing fr
       <span class="step" id="nursing_home">
               <span><b>Nursing home, hospice, care facility, assisted living facility, or similar</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People staying and living in nursing homes, hospices, care facilities, assisted living facilities, or similar should usually consider those homes their usual place of residence, even when they have a residence to which they may have legal or tax obligations.  Unless there is a strong expectation that the facility is strictly temporary, then the person should be considered a usual resident of the facility.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -622,13 +588,13 @@ Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing fr
       <span class="step" id="jail">
               <span><b>Jail, prison, detention facility, juvenile hall</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People in jail, prison, detention facility, in correctional facilities intended for juveniles, in group homes for juveniles (non-correctional), or people in residential treatment centers for juveniles (non-correctional)  will be counted at those facilities if they are in those facilities on April 1, 2010.  While Census is clear that anyone at a facility listed above on April 1, 2010 will be counted at that facility, it's not clear that people temporarily in a holding cell for a few minutes or hours who are being temporarily detained will be counted by that facility.  In this site's opinion, cases where persons are in temporary custody should be counted at their usual place of residence, not at the facility.  Clearly anyone who spends the night or is locked up for more than 12 hours, would likely qualify under Census's classification as someone who should be counted at the facility and not at the usual place of residence.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -636,13 +602,13 @@ Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing fr
       <span class="step" id="homeless">
               <span><b>Homeless people, "tent cities", or similar</b></span><br />
               <label for="p{{ person.id }}_usual_residence">The US Census attempts to count homeless people by counting them in shelters, places where they are staying even temporarily, in hospitals they may be staying in, or other facilities where they happen to be on Thursday, April 1, 2010.  While this will account for a great many homeless people, still, some homeless people do not have the luxury of staying in any facility, home, or residence.  Some actually live on the streets, in "tent cities," or other outdoor or public places.  If a homeless person does not otherwise have a usual place of residence, then that person should be counted where they are on Thursday, April 1, 2010, not at the residence in question.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -650,13 +616,13 @@ Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing fr
       <span class="step" id="foreign">
               <span><b>People visiting from other countries</b></span><br />
               <label for="p{{ person.id }}_usual_residence">The US Census attempts to count homeless people by counting them in shelters, places where they are staying even temporarily, in hospitals they may be staying in, or other facilities where they happen to be on Thursday, April 1, 2010.  While this will account for a great many homeless people, still, some homeless people do not have the luxury of staying in any facility, home, or residence.  Some actually live on the streets, in "tent cities," or other outdoor or public places.  If a homeless person does not otherwise have a usual place of residence, then that person should be counted where they are on Thursday, April 1, 2010, not at the residence in question.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -664,13 +630,13 @@ Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing fr
       <span class="step" id="group">
               <span><b>Group homes</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People in group homes should be counted at the facility, not at a residence they might otherwise legally own or occupy.  If the person is living in a Group Home on April 1, 2010, then that person will be counted as living in that group home.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -680,13 +646,13 @@ Crews of U.S. flag maritime/merchant vessels docked in a U.S. port or sailing fr
               <label for="p{{ person.id }}_usual_residence">People who move into a residence on Thursday, April 1, 2010 (Census Day) who have not been listed on a questionnaire for any residence should be counted at the residence they move into on Census Day.  People who move out of a residence on Thursday, April 1, 2010 (Census Day) and have not moved into a new residence on Thursday, April 1, 2010 and who have not been listed on a questionnaire for any residence should be counted at the residence from which they moved.<br><br>
 
 People who move out of a residence or move into a residence on Thursday, April 1, 2010 (Census Day) who have already been listed on a questionnaire for any residence should not be listed on this questionnaire.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -696,13 +662,13 @@ People who move out of a residence or move into a residence on Thursday, April 1
               <label for="p{{ person.id }}_usual_residence">People living away most of the time while working, such as people who live at a residence close to where they work and return regularly to another residence should be counted at the residence where they live and sleep most of the time.  If there is no residence where they live and sleep most of the time, they are counted where they live and sleep more than anywhere else.  If time is equally divided, or if usual residence cannot be determined, they are counted at the residence where they are staying on Thursday, April 1, 2010 (Census Day). <br><br>
 
 People who live at two or more residences (during the week, month, or year), such as people who travel seasonally between residences (for example, snowbirds) should be counted at the residence where they live and sleep most of the time.  If there is no residence where they live and sleep most of the time, they are counted where they live and sleep more than anywhere else.  If time is equally divided, or if usual residence cannot be determined, they are counted at the residence where they are staying on Thursday, April 1, 2010 (Census Day).</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -710,13 +676,13 @@ People who live at two or more residences (during the week, month, or year), suc
       <span class="step" id="domviol">
               <span><b>Domestic violence shelter, transitional shelters</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People in emergency and transitional shelters (with sleeping facilities) on Thursday, April 1, 2010 (Census Day) for people experiencing homelessness should be counted at the shelter. People in living quarters for victims of natural disasters should be counted at the residence where they live and sleep most of the time. If they do not have a residence where they live and sleep most of the time, they are counted at the facility.  People in domestic violence shelters on Thursday, April 1, 2010 (Census Day) should be counted at the shelter.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -724,13 +690,13 @@ People who live at two or more residences (during the week, month, or year), suc
       <span class="step" id="splitcust">
               <span><b>Children whose parents or guardians split custody</b></span><br />
               <label for="p{{ person.id }}_usual_residence">Children in shared custody or other arrangements who live at more than one residence should be counted at the residence where they live and sleep most of the time.  If time is equally divided, they are counted at the residence where they are staying on Thursday, April 1, 2010 (Census Day).</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -738,13 +704,13 @@ People who live at two or more residences (during the week, month, or year), suc
       <span class="step" id="worker">
               <span><b>Workers' Residential Facilities</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People in workers’ group living quarters and Job Corps Centers should be counted at the residence where they live and sleep most of the time. If they do not have a residence where they live and sleep most of the time, they are counted at the facility.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -752,13 +718,13 @@ People who live at two or more residences (during the week, month, or year), suc
       <span class="step" id="religious">
               <span><b>Religious-Related Residential Facilities</b></span><br />
               <label for="p{{ person.id }}_usual_residence">People in religious group quarters such as convents and monasteries should be counted at the residence where they live and sleep most of the time. If they do not have a residence where they live and sleep most of the time, they are counted at the facility.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
@@ -767,13 +733,13 @@ People who live at two or more residences (during the week, month, or year), suc
               <span><b>Other</b></span><br />
               <label for="p{{ person.id }}_usual_residence">The residence rule is used to determine where people should be counted during the 2010 Census.  The rule says:
 Count people at their usual residence, which is the place where they live and sleep most of the time; People in certain types of facilities or shelters (i.e., places where groups of people live together) on Census Day should be counted at the facility or shelter; People who do not have a usual residence, or cannot determine a usual residence, should be counted where they are on Census Day. Use your best judgment if your case is not like the others.  Best bet is to ask this site or the ultimate reference, the US Census Bureau.</label><br><br>      
-        <label for="p{{ person.id }}_usual_residence">Given the above, should [Person_Num] consider this [his/her] usual residence?</label><br /> <br>
+        <label for="p{{ person.id }}_usual_residence">Given the above, should Person {{ forloop.counter }} consider this [his/her] usual residence?</label><br /> <br>
               <!--  associate triggers with these input elements to prepopulate later fields -->
               <input type="radio" name="p{{ person.id }}_usual_residence" value="yes_usual" />
-                Yes, this is [Person_Num]'s usual residence
+                Yes, this is Person {{ forloop.counter }}'s usual residence
               <br/>
               <input type="radio" name="p{{ person.id }}_usual_residence" value="no_usual" />
-                  No, this is not [Person_Num]'s usual residence
+                  No, this is not Person {{ forloop.counter }}'s usual residence
               <br/>
       <!-- when done, go back to the next person -->
             </span>            
